@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost, deletePost } from '../actions/index';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 class PostsShow extends Component {
   componentWillMount() {
@@ -9,7 +9,10 @@ class PostsShow extends Component {
   }
 
   onDeleteClick() {
-    this.props.deletePost(this.props.params.id);
+    this.props.deletePost(this.props.params.id)
+      .then(() => {
+        browserHistory.push('/');
+      });
   }
 
   render() {
